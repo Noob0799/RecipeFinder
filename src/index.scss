@@ -1,0 +1,259 @@
+@import "~bootstrap/scss/bootstrap.scss";
+@import "./styles/colors.scss";
+@import "./styles/mixins.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+
+  --bs-nav-tabs-link-active-color: #ffd43b;
+  --bs-nav-tabs-link-active-bg: #0f171e;
+  --bs-nav-tabs-link-active-border-color: #ffd43b;
+  --bs-nav-link-color: #ffd43b;
+  --bs-nav-link-hover-color: #0f171e;
+  --bs-nav-tabs-border-color: #ffd43b !important;
+  --bs-nav-tabs-link-hover-border-color: #ffd43b !important;
+  --bs-nav-tabs-link-hover-bg: #ffd43b;
+}
+
+body {
+  background-color: $secondary-color;
+  color: $font-white;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header {
+  height: 10vh;
+  padding: 0 20px;
+  background-color: $primary-color;
+  @include font-style($font-white, 600, 24px);
+  @include flex-style(row, space-between, center, 0);
+  .fa-heart {
+    color: $font-red;
+  }
+  .search-container {
+    width: 50%;
+    @include flex-style(column, flex-start, center, 0);
+    position: relative;
+    .search-bar {
+      width: 100%;
+      height: 40px;
+      padding: 5px;
+      @include font-style($font-black, 600, 16px);
+      border-radius: 5px;
+      border: none;
+      outline: none;
+    }
+    .suggestions-container {
+      position: absolute;
+      top: 40px;
+      z-index: 9999;
+      width: 100%;
+      margin-top: 2px;
+      background-color: $font-white;
+      @include font-style($font-black, 600, 16px);
+      & > div {
+        padding: 5px;
+        &.suggestions-item {
+          @include flex-style(row, flex-start, center, 10px);
+          .img-container {
+            height: 40px;
+            width: 40px;
+            background-color: $font-grey;
+            img {
+              height: 40px;
+              object-fit: contain;
+            }
+          }
+          &.selected {
+            background-color: $font-lightgrey;
+          }
+        }
+        &:not(:last-child) {
+          border-bottom: 1px solid black;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: $font-lightgrey;
+        }
+      }
+    }
+  }
+}
+
+footer {
+  height: 10vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: $primary-color;
+  @include font-style($font-white, 600, 16px);
+  @include flex-style(column, center, center, 0);
+}
+
+.home-container,
+.favourites-container,
+.recipe-details-container {
+  padding: 20px;
+  max-height: 80vh;
+  overflow-y: auto;
+  h2 {
+    margin: 10px 0;
+    .fa-star,
+    .fa-face-smile {
+      color: $font-yellow;
+      margin-left: 5px;
+    }
+  }
+  .recipe-card {
+    margin: 0 10px;
+    width: 200px;
+    background-color: $primary-color;
+    transition: transform 0.5s;
+    &:hover {
+      transform: scale(1.05);
+    }
+    cursor: pointer;
+    .recipe-card-top {
+      height: 200px;
+      background-color: $font-grey;
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .recipe-card-bottom {
+      padding: 10px 0;
+      @include flex-style(column, center, center, 7px);
+      @include font-style($font-white, 400, 14px);
+      .recipe-name {
+        text-align: center;
+      }
+      b {
+        color: $font-yellow;
+      }
+      .remove-from-favourites {
+        padding: 4px 5px;
+        @include font-style($font-black, 600, 12px);
+      }
+    }
+  }
+}
+
+.home-container {
+  .all-recipes-container,
+  .top-rated-container,
+  .easy-to-cook-container {
+    padding: 20px;
+    .loading-container,
+    .no-data-container {
+      height: 60vh;
+      @include flex-style(column, center, center, 0);
+      .fa-spinner {
+        color: $font-white;
+      }
+    }
+  }
+  .all-recipes-container {
+    @include flex-style(row, center, center, 20px);
+    flex-wrap: wrap;
+  }
+  .pagination-container {
+    margin-top: 20px;
+    width: 100%;
+    @include flex-style(row, center, center, 0);
+    button {
+      background-color: $font-yellow;
+      border: none;
+      padding: 10px;
+      &.selected,
+      &:hover {
+        background-color: $secondary-color;
+        color: $font-yellow;
+      }
+    }
+  }
+}
+
+button {
+  padding: 2px 5px;
+  @include font-style($font-black, 600, 16px);
+  cursor: pointer;
+  &.add-to-favourites {
+    background-color: $font-yellow;
+  }
+  &.remove-from-favourites {
+    background-color: $font-red;
+  }
+  &.section-btn {
+    background-color: $font-yellow;
+    padding: 5px 10px;
+  }
+  &.nav-link:hover {
+    background-color: var(--bs-nav-tabs-link-hover-bg);
+  }
+}
+
+.favourites-container {
+  @include flex-style(row, center, center, 10px);
+  flex-wrap: wrap;
+  &.no-favourites-available {
+    height: 75vh;
+    @include flex-style(column, center, center, 0);
+  }
+}
+
+.recipe-details-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  .recipe-details-left {
+    @include flex-style(column, flex-start, flex-start, 10px);
+    padding-right: 20px;
+    b {
+      color: $font-yellow;
+    }
+    .btn-container {
+      width: 100%;
+      @include flex-style(row, space-between, center, 0);
+      button {
+        padding: 5px 10px;
+      }
+      .tags-container {
+        @include flex-style(row, flex-start, center, 10px);
+        .tags {
+          background-color: $font-yellow;
+          @include font-style($font-black, 600, 14px);
+          padding: 5px 10px;
+        }
+      }
+    }
+    ul {
+      padding: 5px 30px;
+      @include flex-style(row, flex-start, center, 0);
+      flex-wrap: wrap;
+      li {
+        margin-right: 30px;
+      }
+    }
+  }
+  .recipe-details-right {
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+.no-data-available, .loading-container, .no-favourites-available {
+  height: 75vh;
+  @include flex-style(column, center, center, 0);
+  .fa-spinner {
+    color: $font-white;
+  }
+}
