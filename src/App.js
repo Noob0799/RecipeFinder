@@ -5,22 +5,14 @@ import RecipeDetails from "./pages/RecipeDetails";
 import PageNotFound from "./pages/PageNotFound";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { getFavourites, clearSearch } from "./redux/slices/recipesSlice";
-import { useEffect, lazy, Suspense } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { clearSearch } from "./redux/slices/recipesSlice";
+import { useDispatch } from "react-redux";
 import AllRecipes from "./components/AllRecipes";
 import TopRated from "./components/TopRated";
 import EasyToCook from "./components/EasyToCook";
-import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
-  const { favourites } = useSelector((state) => state.recipes);
-  useEffect(() => {
-    if (!favourites.length) {
-      dispatch(getFavourites());
-    }
-  }, []);
   const handleClick = (e) => {
     if (!e.target.closest(".suggestions-container")) {
       dispatch(clearSearch());
