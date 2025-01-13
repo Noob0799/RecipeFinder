@@ -40,6 +40,7 @@ const recipesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getAllRecipes.pending, (state) => {
+      state.recipes = [];
       state.loading = true;
     });
     builder.addCase(getAllRecipes.fulfilled, (state, action) => {
@@ -51,6 +52,7 @@ const recipesSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getTopRatedRecipes.pending, (state) => {
+      state.topRatedRecipes = [];
       state.loading = true;
     });
     builder.addCase(getTopRatedRecipes.fulfilled, (state, action) => {
@@ -63,6 +65,7 @@ const recipesSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getEasyRecipes.pending, (state) => {
+      state.easyRecipes = [];
       state.loading = true;
     });
     builder.addCase(getEasyRecipes.fulfilled, (state, action) => {
@@ -75,8 +78,8 @@ const recipesSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(getRecipe.pending, (state) => {
-      state.loading = true;
       state.selectedRecipe = null;
+      state.loading = true;
     });
     builder.addCase(getRecipe.fulfilled, (state, action) => {
       state.selectedRecipe = action.payload;

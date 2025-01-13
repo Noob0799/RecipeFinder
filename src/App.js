@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import Favourites from "./pages/Favourites";
 import RecipeDetails from "./pages/RecipeDetails";
@@ -6,8 +6,12 @@ import PageNotFound from "./pages/PageNotFound";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { getFavourites, clearSearch } from "./redux/slices/recipesSlice";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import AllRecipes from "./components/AllRecipes";
+import TopRated from "./components/TopRated";
+import EasyToCook from "./components/EasyToCook";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,7 +31,13 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Navigate to="/home" replace={true} />} />
+          <Route path="/home" element={<Home />} >
+            <Route index element={<Navigate to="all" />} />
+            <Route path="all" element={<AllRecipes />} />
+            <Route path="topRated" element={<TopRated />} />
+            <Route path="easyToCook" element={<EasyToCook />} />
+          </Route>
           <Route path="/favourites" element={<Favourites />} />
           <Route path="/recipeDetails/:id" element={<RecipeDetails />} />
           <Route path="*" element={<PageNotFound />} />

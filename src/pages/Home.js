@@ -1,8 +1,7 @@
-import AllRecipes from "../components/AllRecipes";
-import TopRated from "../components/TopRated";
-import EasyToCook from "../components/EasyToCook";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="home-container">
@@ -17,6 +16,7 @@ const Home = () => {
               role="tab"
               aria-controls="nav-all-recipes"
               aria-selected="true"
+              onClick={() => navigate("/home/all")}
             >
               All Recipes
             </button>
@@ -29,6 +29,7 @@ const Home = () => {
               role="tab"
               aria-controls="nav-top-rated"
               aria-selected="false"
+              onClick={() => navigate("/home/topRated")}
             >
               Top Rated (4 & More) <i className="fa-solid fa-star"></i>
             </button>
@@ -41,37 +42,13 @@ const Home = () => {
               role="tab"
               aria-controls="nav-easy-to-cook"
               aria-selected="false"
+              onClick={() => navigate("/home/easyToCook")}
             >
               Easy To Cook <i className="fa-solid fa-face-smile"></i>
             </button>
           </div>
         </nav>
-        <div className="tab-content" id="nav-tabContent">
-          <div
-            className="tab-pane fade show active"
-            id="nav-all-recipes"
-            role="tabpanel"
-            aria-labelledby="nav-all-recipes-tab"
-          >
-            <AllRecipes />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="nav-top-rated"
-            role="tabpanel"
-            aria-labelledby="nav-top-rated-tab"
-          >
-            <TopRated />
-          </div>
-          <div
-            className="tab-pane fade"
-            id="nav-easy-to-cook"
-            role="tabpanel"
-            aria-labelledby="nav-easy-to-cook-tab"
-          >
-            <EasyToCook />
-          </div>
-        </div>
+        <Outlet />
       </div>
     </>
   );

@@ -14,9 +14,6 @@ const AllRecipes = () => {
   );
   useEffect(() => {
     fetchAllRecipes();
-  }, []);
-  useEffect(() => {
-    fetchAllRecipes();
   }, [currentPage]);
   const fetchAllRecipes = () => {
     dispatch(getAllRecipes(currentPage));

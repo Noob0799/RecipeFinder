@@ -8,7 +8,7 @@ const Header = () => {
 
   return (
     <header>
-      {pathname === "/" && (
+      {pathname.includes("/home") && (
         <>
           <div>Recipe Finder</div>
           <SearchBar />
@@ -23,14 +23,14 @@ const Header = () => {
       {pathname === "/favourites" && (
         <>
           <div>
-            <Link to="/">Home</Link>
+            <Link to="/home/all">Home</Link>
           </div>
         </>
       )}
       {pathname.includes("/recipeDetails") && (
         <>
           <div>
-            <Link to="/">Home</Link>
+            <Link to="/home/all">Home</Link>
           </div>
           <div>
             <Link to="/favourites">
